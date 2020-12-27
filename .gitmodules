@@ -1,0 +1,3 @@
+[submodule "site/themes/tt-theme/assets/spectre"]
+	path = site/themes/tt-theme/assets/spectre
+	url = https://github.com/picturepan2/spectre.git

@@ -1,0 +1,20 @@
+<div class="post">
+    <h2>
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </h2>
+
+    <div class="in-post-summary">
+        {{ range .Params.tags }}
+            {{ $name := . }}
+            {{ with $.Site.GetPage (printf "/tags/%s" $name ) }}
+                <a class="in-post-tag" href="{{ .Permalink }}">{{ $name }}</a>
+            {{ end }}
+        {{ end }}
+        | {{ .Date.Format "2 Jan 2006" }}
+    </div>
+
+    <div>
+        {{ .Content }}
+    </div>
+    <div class="text-center">--~--</div>
+</div>

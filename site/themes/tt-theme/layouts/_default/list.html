@@ -1,0 +1,11 @@
+{{ define "main" }}
+    <h3 class="list-header">#{{ lower .Title }}</h3>
+    {{ $paginator := .Paginate ( .Pages ) }}
+    {{ range $paginator.Pages }}
+        {{ partial "post.html" . }}
+    {{ end }}
+
+    <div class="section centered">
+        {{ partial "paginator.html" . }}
+    </div>
+{{ end }}

@@ -1,0 +1,10 @@
+{{ define "main" }}
+    {{ $paginator := .Paginate  (.Site.RegularPages) }}
+    {{ range $paginator.Pages }}
+        {{ partial "post.html" . }}
+    {{ end }}
+
+    <div class="section centered">
+        {{ partial "paginator.html" . }}
+    </div>
+{{ end }}
