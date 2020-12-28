@@ -1,5 +1,5 @@
 {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
     {{ with $.Site.GetPage (printf "/tags/%s" $name) }}
-        <a href="{{ .Permalink }}" class="tag" yf-count="{{ $taxonomy.Count }}">{{ $name }}</a> |
+        <a href="{{ .Permalink }}" class="tag">{{ $name }}</a> <sup>{{ $taxonomy.Count }}</sup>
     {{ end }}
 {{ end }}

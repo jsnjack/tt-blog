@@ -1,6 +1,6 @@
 baseURL = "http://example.org/"
 languageCode = "en-us"
-title = "Notes"
+title = "notes"
 
 theme = "tt-theme"
 
