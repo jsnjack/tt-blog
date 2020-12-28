@@ -1,5 +1,5 @@
 ---
-title: "CPU benchmark"
+title: "i5-6440HQ CPU benchmark"
 date: 2018-03-11T22:08:31+01:00
 draft: false
 tags: ["linux", "benchmark", "cpu", "sysbench"]
