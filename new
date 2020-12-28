@@ -1,0 +1,2 @@
+DEFAULT_EDITOR=gedit
+bash -c "cd site && hugo new posts/$1.md && $DEFAULT_EDITOR content/posts/$1.md"
