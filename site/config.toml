@@ -7,3 +7,6 @@ theme = "tt-theme"
 paginate = 10
 pygmentsCodeFences = true
 pygmentsStyle = "tango"
+
+[outputs]
+    home = ["HTML", "RSS", "JSON"]

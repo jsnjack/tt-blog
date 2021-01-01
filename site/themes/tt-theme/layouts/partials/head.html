@@ -15,3 +15,6 @@
 {{ range .Site.Params.customCSS -}}
 <link rel="stylesheet" href="{{ . | relURL }}">
 {{- end }}
+
+<script src="/js/mark.js"></script>
+<script src="/js/search.js"></script>

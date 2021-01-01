@@ -1,4 +1,20 @@
 <h1 class="text-center">
     <a href="/">notes</a>
 </h1>
+
+<div class="divider text-center" data-content="TAGS"></div>
 {{ partial "tags.html" . }}
+
+<div class="divider text-center" data-content="FIND ME ON"></div>
+<div>
+<a href="https://github.com/jsnjack" title="jsnjack's profile on github.com">
+    <img src="/svg/github-logo.svg">
+</a>
+<a href="https://www.linkedin.com/in/yshulitski/" title="jsnjack's profile on linkedin">
+    <img src="/svg/linkedin.svg">
+</a>
+</div>
+
+<div class="divider text-center" data-content="SEARCH"></div>
+<input id="search-query" placeholder="Search" />
+<div id="search-results" style="display:none;"></div>
