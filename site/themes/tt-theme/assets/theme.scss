@@ -62,3 +62,9 @@ body {
     word-wrap: anywhere;
 }
 
+#blog-title {
+    color: $primary-color;
+    &:visited{
+        color: $primary-color;
+    }
+}
