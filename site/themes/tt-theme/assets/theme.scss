@@ -69,7 +69,8 @@ body {
 
 #blog-title {
     color: $primary-color;
-    &:visited{
-        color: $primary-color;
-    }
+}
+
+a:visited{
+    color: $primary-color;
 }
