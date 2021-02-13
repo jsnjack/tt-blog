@@ -62,6 +62,11 @@ body {
 #search-results{
     font-size: 80%;
     word-wrap: anywhere;
+    .search-summary {
+        background-color: whitesmoke;
+        padding: 0.2em;
+        margin-bottom: 0.5em;
+    }
 }
 
 #blog-title {

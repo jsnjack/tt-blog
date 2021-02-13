@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function(){
                     if (firstIndexOf !== 0) { summary = "...".concat(summary); }
                     if (lastIndexOf !== value.content.length - 1) { summary = summary.concat("..."); }
 
-                    let div = "".concat("<div id=\"search-summary-", key, "\">")
+                    let div = "".concat("<div class=\"search-summary\" id=\"search-summary-", key, "\">")
                         .concat("<h6 class=\"post-title\"><a href=\"", value.permalink, "\">", value.title, "</a></h6>")
                         .concat("<p>", summary, "</p>")
                         .concat("</div>");
