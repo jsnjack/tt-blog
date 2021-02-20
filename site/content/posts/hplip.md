@@ -2,7 +2,7 @@
 title: "Configure HP printer in fedora"
 date: 2021-01-29T20:14:29+01:00
 draft: false
-tags: ["linux", "fedora", "hp", "printer"]
+tags: ["linux", "fedora", "hp", "printer", "fresh system"]
 ---
 
 Default `Printer` application in GNOME (fedora 33) is not able to successfully configure wireless printer, it needs to be done manually:

@@ -2,7 +2,7 @@
 title: "Disable Wayland and switch to X11"
 date: 2021-02-20T21:53:35+01:00
 draft: false
-tags: ["linux", "fedora", "x11"]
+tags: ["linux", "fedora", "x11", "fresh system"]
 ---
 
 By default fedora uses Wayland. Make sure the following section exists in `/etc/gdm/custom.conf`:

@@ -2,7 +2,7 @@
 title: "Install multimedia codecs in fedora"
 date: 2021-01-16T21:27:31+01:00
 draft: false
-tags: ["linux", "fedora", "fedora33", "youtube", "codecs", "cpu", "firefox"]
+tags: ["linux", "fedora", "fedora33", "youtube", "codecs", "cpu", "firefox", "fresh system"]
 ---
 If you are experiencing high CPU usage when watching videos on youtube, verify that the following packages are installed (requires RPMFusion repository):
 ```bash
