@@ -11,7 +11,7 @@ psql -U postgres
 ```
 
 Run the following commands:
-```
+```bash
 UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';
 
 DROP DATABASE template1;

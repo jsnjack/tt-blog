@@ -6,6 +6,6 @@ tags: ["linux", "debian"]
 ---
 
 To check if ca-certificates package is installed run this command:
-```
+```bash
 dpkg -s ca-certificates
 ```

@@ -6,6 +6,6 @@ tags: ["linux", "debug", "wireshark", "tcpdump"]
 ---
 
 Create TCP dump of all traffic on localhost on port 8888
-```
+```bash
 sudo tcpdump -i lo "port 8888" -w dump
 ```

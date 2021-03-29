@@ -10,7 +10,7 @@ gedit ~/.config/autostart/flux.desktop
 ```
 
 The content of the file can be something like:
-```
+```c
 [Desktop Entry]
 Type=Application
 Name=flux

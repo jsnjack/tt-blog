@@ -6,6 +6,6 @@ tags: ["linux", "firewalld", "debug"]
 ---
 
 Edit file `/etc/sysconfig/firewalld`:
-```
+```c
 FIREWALLD_ARGS=--debug=10
 ```

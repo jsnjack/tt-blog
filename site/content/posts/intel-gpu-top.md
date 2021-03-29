@@ -11,7 +11,7 @@ sudo intel_gpu_top
 ```
 
 Playing 4k [video sample](https://www.youtube.com/watch?v=A_hF37w6Uao&t=293s) on youtube (intel i3-8100T):
-```
+```bash
 intel-gpu-top: Intel Coffeelake (Gen9) @ /dev/dri/card0 - 1063/1083 MHz;    1% RC6;  7.35/19.18 W;      467 irqs/s
 
       IMC reads:     6889 MiB/s
@@ -25,7 +25,7 @@ intel-gpu-top: Intel Coffeelake (Gen9) @ /dev/dri/card0 - 1063/1083 MHz;    1% R
 ```
 
 Playing the same video in 1080p (intel i3-8100T)::
-```
+```bash
 intel-gpu-top: Intel Coffeelake (Gen9) @ /dev/dri/card0 -  591/ 591 MHz;   30% RC6;  3.06/ 6.47 W;      474 irqs/s
 
       IMC reads:     4058 MiB/s

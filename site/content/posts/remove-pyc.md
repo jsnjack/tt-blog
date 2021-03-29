@@ -6,6 +6,6 @@ tags: ["linux", "bash", "python"]
 ---
 
 Remove all *.pyc files from the current directory (and subdirectories):
-```
+```bash
 find . -name \*.pyc -delete
 ```

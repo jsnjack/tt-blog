@@ -6,7 +6,7 @@ tags: ["linux", "bash"]
 ---
 
 To check what command is assigned to the alias use type command:
-```
+```bash
 $ type gl
 gl is aliased to `git log --oneline`
 ```

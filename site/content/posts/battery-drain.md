@@ -7,14 +7,14 @@ tags: ["linux", "dell", "laptop", "battery"]
 
 Run the following command to check the suspend mode:
 ```bash
-cat /sys/power/mem_sleep 
+cat /sys/power/mem_sleep
 ```
 If the output looks like this:
-```
+```c
 [s2idle] deep
 ```
 It means that very inefficient suspend mode is active (drains battery from 100% to 0 in 9 hours). To enable "deep" mode, edit file `/etc/default/grub` and append `mem_sleep_default=deep` to `GRUB_CMDLINE_LINUX`:
-```
+```c
 GRUB_TIMEOUT=5
 GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
 GRUB_DEFAULT=saved
@@ -31,6 +31,6 @@ sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
 
 Restart your laptop and verify changes:
 ```bash
-$ cat /sys/power/mem_sleep 
+$ cat /sys/power/mem_sleep
 s2idle [deep]
 ```

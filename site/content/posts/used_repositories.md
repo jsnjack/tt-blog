@@ -6,6 +6,6 @@ tags: ["linux", "dnf"]
 ---
 
 Print how many packages are installed per repository:
-```
+```bash
 sudo dnf list --installed | grep -E -o "@.*" | sort | uniq -c
 ```

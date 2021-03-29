@@ -6,6 +6,6 @@ tags: ["linux", "dnsmasq", "debug"]
 ---
 
 Add the following line to dnsmasq configuration file:
-```
+```c
 log-queries
 ```

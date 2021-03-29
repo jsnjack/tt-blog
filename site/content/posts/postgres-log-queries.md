@@ -6,14 +6,14 @@ tags: ["linux", "postgresql", "debug"]
 ---
 
 If you want to inspect what queries exactly Django ORM sends to the PostgreSQL, you can do it with postgres logging. The first step is to enable logging. Add
-```
-log_statement = 'all' 
+```bash
+log_statement = 'all'
 ```
 to the file:
-```
+```bash
 sudo vim /etc/postgresql/9.4/main/postgresql.conf
 ```
 Then you are able to see raw SQL queries with command:
-```
-sudo tail -f /var/log/postgresql/postgresql-9.4-main.log 
+```bash
+sudo tail -f /var/log/postgresql/postgresql-9.4-main.log
 ```

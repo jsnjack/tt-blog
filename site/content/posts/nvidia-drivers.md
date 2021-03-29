@@ -35,6 +35,6 @@ sudo dnf install vdpauinfo libva-vdpau-driver libva-utils xorg-x11-drv-nvidia-cu
 Reboot system.
 
 Verify that `nouveau` driver is disabled:
-```
+```bash
 lsmod |grep nouveau
 ```

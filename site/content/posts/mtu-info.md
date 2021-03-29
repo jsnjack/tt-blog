@@ -20,7 +20,7 @@ Modify temporarily:
 ifconfig eth0 mtu 1450
 ```
 Permanently: edit `/etc/sysconfig/network-scripts/ifcfg-eth0` file and add:
-```
+```bash
 MTU=1450
 ```
 > Might be the reason why the system can establish HTTP connection but HTTPS

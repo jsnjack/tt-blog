@@ -5,11 +5,11 @@ draft: false
 tags: ["linux", "gnome", "komodo"]
 ---
 Remove
-```
+```bash
 text/plain=komodo-edit-9.desktop
 ```
 
 from file
-```
+```bash
 ~/.local/share/applications/defaults.list
 ```

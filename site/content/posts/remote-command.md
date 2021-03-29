@@ -5,10 +5,10 @@ draft: false
 tags: ["linux", "ssh"]
 ---
 
-```
+```bash
 nohup database_migration.sh &
 ```
  - `nohup` will take care of running the command and forward command output to `nohup.out`
  - `&` will run the command in the background
- 
+
  Use `tail -f nohup.out` to get the output from the command

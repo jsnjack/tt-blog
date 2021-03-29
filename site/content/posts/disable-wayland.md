@@ -6,7 +6,7 @@ tags: ["linux", "fedora", "x11", "fresh system"]
 ---
 
 By default fedora uses Wayland. Make sure the following section exists in `/etc/gdm/custom.conf`:
-```
+```c
 [daemon]
 # Uncomment the line below to force the login screen to use Xorg
 WaylandEnable=false
