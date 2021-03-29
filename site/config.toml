@@ -6,7 +6,7 @@ theme = "tt-theme"
 
 paginate = 10
 pygmentsCodeFences = true
-pygmentsStyle = "tango"
+pygmentsStyle = "native"
 
 enableRobotsTXT = true
 
