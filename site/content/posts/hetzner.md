@@ -47,3 +47,6 @@ nmtui
 ```
 
 > Restarting NetworkManager wasn't enough to apply custom routes. Bring interface up and down
+
+And the link to the great [RedHat documentation](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_and_managing_networking/configuring-vlan-tagging_configuring-and-managing-networking)
+
