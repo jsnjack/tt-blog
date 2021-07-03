@@ -2,6 +2,10 @@
     <a id="blog-title" href="/">notes</a>
 </h1>
 
+<div class="divider text-center" data-content="SEARCH"></div>
+<input id="search-query" placeholder="Search" />
+<div id="search-results" style="display:none;"></div>
+
 <div class="divider text-center" data-content="TAGS"></div>
 <div class="sidebar-tags">
 {{ partial "tags.html" . }}
@@ -16,7 +20,3 @@
     <img src="/svg/linkedin.svg">
 </a>
 </div>
-
-<div class="divider text-center" data-content="SEARCH"></div>
-<input id="search-query" placeholder="Search" />
-<div id="search-results" style="display:none;"></div>
