@@ -10,6 +10,10 @@ body {
 
 .sidebar-tags {
     line-height: 2;
+    .tag-letter {
+        text-transform: uppercase;
+        color: gray;
+    }
 }
 
 .post {

@@ -1,5 +1,16 @@
 {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
     {{ with $.Site.GetPage (printf "/tags/%s" $name) }}
-        <a href="{{ .Permalink }}" class="tag">{{ $name }}</a> <sup>{{ $taxonomy.Count }}</sup>
+        {{ $.Scratch.Set "current" (slicestr $name 0 1) }}
+        {{ if ne ($.Scratch.Get "current") ($.Scratch.Get "previous") }}
+            <div class="tag-letter text-right" >{{ $.Scratch.Get "current" }}</div>
+        {{ end }}
+        <a
+            href="{{ .Permalink }}"
+            class="tag"
+        >
+            {{ $name }}
+        </a>
+        <sup>{{ $taxonomy.Count }}</sup>
+        {{ $.Scratch.Set "previous" ($.Scratch.Get "current") }}
     {{ end }}
 {{ end }}
