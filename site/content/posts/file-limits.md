@@ -2,7 +2,7 @@
 title: "Open file limits"
 date: 2021-07-12T18:48:50+02:00
 draft: false
-tags: ["linux", "system", "systemd", "nofile", "ulimit"]
+tags: ["linux", "system", "systemd", "nofile", "ulimit", "debug"]
 ---
 
 Print system limits:
@@ -43,23 +43,23 @@ client   3212070  0.0  0.0  12132  1160 pts/0    S+   16:57   0:00 grep --color=
 # Check current limits for the process
 
 16:57 $ cat /proc/3200102/limits
-Limit                     Soft Limit           Hard Limit           Units     
-Max cpu time              unlimited            unlimited            seconds   
-Max file size             unlimited            unlimited            bytes     
-Max data size             unlimited            unlimited            bytes     
-Max stack size            8388608              unlimited            bytes     
-Max core file size        unlimited            unlimited            bytes     
-Max resident set          unlimited            unlimited            bytes     
-Max processes             514130               514130               processes 
-Max open files            1024                 262144               files     
-Max locked memory         65536                65536                bytes     
-Max address space         unlimited            unlimited            bytes     
-Max file locks            unlimited            unlimited            locks     
-Max pending signals       514130               514130               signals   
-Max msgqueue size         819200               819200               bytes     
-Max nice priority         0                    0                    
-Max realtime priority     0                    0                    
-Max realtime timeout      unlimited            unlimited            us     
+Limit                     Soft Limit           Hard Limit           Units
+Max cpu time              unlimited            unlimited            seconds
+Max file size             unlimited            unlimited            bytes
+Max data size             unlimited            unlimited            bytes
+Max stack size            8388608              unlimited            bytes
+Max core file size        unlimited            unlimited            bytes
+Max resident set          unlimited            unlimited            bytes
+Max processes             514130               514130               processes
+Max open files            1024                 262144               files
+Max locked memory         65536                65536                bytes
+Max address space         unlimited            unlimited            bytes
+Max file locks            unlimited            unlimited            locks
+Max pending signals       514130               514130               signals
+Max msgqueue size         819200               819200               bytes
+Max nice priority         0                    0
+Max realtime priority     0                    0
+Max realtime timeout      unlimited            unlimited            us
 
 # Print number of open files for the process
 
@@ -74,3 +74,4 @@ Systemd needs this limit specified per service (otherwise it will be 1024):
 LimitNOFILE=2048
 
 ```
+
