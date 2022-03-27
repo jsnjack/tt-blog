@@ -7,6 +7,7 @@ import (
 	"html/template"
 	"log"
 	"os"
+	"time"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -90,7 +91,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	encoded := base64.StdEncoding.EncodeToString(buf.Bytes())
 	attachment.SetContent(encoded)
 	attachment.SetType("text/html")
-	attachment.SetFilename(title + ".html")
+	attachment.SetFilename("NOS " + time.Now().Format("2006-01-02") + ".html")
 	attachment.SetDisposition("attachment")
 
 	m.AddAttachment(attachment)
