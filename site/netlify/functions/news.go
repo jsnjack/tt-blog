@@ -23,8 +23,18 @@ const docTemplate = `
 	</head>
 	<body>
 		{{range .Items}}
+		<h2>Today, in the Netherlands:</h2>
+		<ul>
+			<li>
+				<a href="#{{.GUID}}">{{{{.Title}}}}</a>
+			</li>
+		</ul>
+		<mbp:pagebreak/>
+		{{end}}
+		{{range .Items}}
 			<article>
 				<h2>{{.Title}}</h2>
+				<a id={{.GUID}}></a>
 				{{safeHTML .Description}}
 				<a href="{{.Link}}" target="_blank">Open the article</a>
 				<mbp:pagebreak/>
