@@ -24,8 +24,8 @@ const docTemplate = `
 		<title>{{.Title}} {{slice .Published 0 16}}</title>
 	</head>
 	<body>
+		<h2>Today, in the Netherlands:</h2>
 		{{range .Items}}
-			<h2>Today, in the Netherlands:</h2>
 			<ul>
 				<li>
 					<a href="#{{.GUID}}">{{.Title}}</a>
