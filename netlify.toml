@@ -1,9 +1,10 @@
 [build]
   base = "site/"
   publish = "public/"
-  command = "hugo --gc --minify"
+  command = "hugo --gc --minify && cd netlify/functions/ && go get ./... && CGO_ENABLED=0 go build -o news news.go"
 
 [context.production.environment]
   HUGO_VERSION = "0.86.0"
   HUGO_ENV = "production"
   HUGO_ENABLEGITINFO = "true"
+  GO_VERSION = "1.16.15"
