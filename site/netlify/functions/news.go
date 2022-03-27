@@ -28,7 +28,7 @@ const docTemplate = `
 		<h2>Today, in the Netherlands:</h2>
 		<ul>
 			<li>
-				<a href="#{{.GUID}}">{{{{.Title}}}}</a>
+				<a href="#{{.GUID}}">{{.Title}}</a>
 			</li>
 		</ul>
 		<mbp:pagebreak/>
