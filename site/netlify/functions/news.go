@@ -19,15 +19,15 @@ const docTemplate = `
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title>{{.Title}} {{slice .Published 0 16}}</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	</head>
 	<body>
 		{{range .Items}}
 			<article>
-				<h1>{{ .Title }}</h1>
-				{{safeHTML .Description }}
-				<a href="{{ .Link }}" target="_blank">Open the article</a>
+				<h2>{{.Title}}</h2>
+				{{safeHTML .Description}}
+				<a href="{{.Link}}" target="_blank">Open the article</a>
+				<mbp:pagebreak/>
 			</article>
 		{{else}}
 			No news today. Has the World ended?
