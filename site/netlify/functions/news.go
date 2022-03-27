@@ -25,14 +25,16 @@ const docTemplate = `
 	</head>
 	<body>
 		{{range .Items}}
-		<h2>Today, in the Netherlands:</h2>
-		<ul>
-			<li>
-				<a href="#{{.GUID}}">{{.Title}}</a>
-			</li>
-		</ul>
-		<mbp:pagebreak/>
+			<h2>Today, in the Netherlands:</h2>
+			<ul>
+				<li>
+					<a href="#{{.GUID}}">{{.Title}}</a>
+				</li>
+			</ul>
+		{{else}}
+			No news today. Has the World ended?
 		{{end}}
+		<mbp:pagebreak/>
 		{{range .Items}}
 			<article>
 				<h2>{{.Title}}</h2>
@@ -41,8 +43,6 @@ const docTemplate = `
 				<a href="{{.Link}}" target="_blank">Open the article</a>
 				<mbp:pagebreak/>
 			</article>
-		{{else}}
-			No news today. Has the World ended?
 		{{end}}
 	</body>
 </html>`
