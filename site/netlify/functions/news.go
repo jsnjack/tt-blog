@@ -62,7 +62,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 
 	from := mail.NewEmail("Yauhen's Netlify", "noreply@yauhen.space")
 	content := mail.NewContent("text/html", title)
-	to := mail.NewEmail("Yauhen", "jsnjack@gmail.com")
+	to := mail.NewEmail("Yauhen", "jsnjack@kindle.com")
 
 	m.SetFrom(from)
 	m.AddContent(content)
@@ -99,7 +99,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	return &events.APIGatewayProxyResponse{
 		StatusCode:      200,
 		Headers:         map[string]string{"Content-Type": "text/plain"},
-		Body:            "Hello, World!",
+		Body:            fmt.Sprintf("Collected %d articles", len(feed.Items)),
 		IsBase64Encoded: false,
 	}, nil
 }
