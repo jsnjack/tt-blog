@@ -37,8 +37,8 @@ const docTemplate = `
 		<mbp:pagebreak/>
 		{{range .Items}}
 			<article>
-				<h2>{{.Title}}</h2>
 				<a id={{.GUID}}></a>
+				<h2>{{.Title}}</h2>
 				{{safeHTML .Description}}
 				<a href="{{.Link}}" target="_blank">Open the article</a>
 				<mbp:pagebreak/>
