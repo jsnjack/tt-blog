@@ -19,7 +19,7 @@ const docTemplate = `
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>{{.Title}} {{slice .Published 0 16}}</title>
 	</head>
 	<body>
