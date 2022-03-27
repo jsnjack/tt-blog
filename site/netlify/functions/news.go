@@ -20,6 +20,7 @@ const docTemplate = `
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>{{.Title}} {{slice .Published 0 16}}</title>
 	</head>
 	<body>
 		{{range .Items}}
@@ -89,7 +90,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	encoded := base64.StdEncoding.EncodeToString(buf.Bytes())
 	attachment.SetContent(encoded)
 	attachment.SetType("text/html")
-	attachment.SetFilename("news.html")
+	attachment.SetFilename(title + ".html")
 	attachment.SetDisposition("attachment")
 
 	m.AddAttachment(attachment)
