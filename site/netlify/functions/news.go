@@ -28,8 +28,8 @@ const docTemplate = `
 		<title>{{.Title}} {{slice .Published 0 16}}</title>
 	</head>
 	<body>
-		<h2>Today, in the Netherlands:</h2>
 		<a id="start"></a>
+		<h2>Vandaag, in Nederland:</h2>
 		{{range .Items}}
 			<ul>
 				<li>
@@ -46,8 +46,11 @@ const docTemplate = `
 				<h2>{{.Title}}</h2>
 				{{renderEnclosures .Enclosures}}
 				{{safeHTML .Description}}
-				<a href="{{.Link}}" target="_blank">Open the article</a>
-				<a href="#start">Home</a>
+				<dl>
+					<dt>Navigate:</dt>
+					<dd><a href="{{.Link}}" target="_blank">Open the article online</a></dd>
+					<dd><a href="#start">Home</a></dd>
+				</dl>
 				<mbp:pagebreak/>
 			</article>
 		{{end}}
@@ -65,7 +68,7 @@ func renderEnclosures(en []*gofeed.Enclosure) template.HTML {
 		if strings.HasPrefix(item.Type, "image/") {
 			dataURL := toDataURL(item.URL)
 			if dataURL != "" {
-				data += fmt.Sprintf(`<img src="%s">\n`, dataURL)
+				data += fmt.Sprintf(`<img src="%s">`, dataURL)
 			}
 		}
 	}
