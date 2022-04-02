@@ -132,6 +132,7 @@ func extractDomain(feedURL string) string {
 
 func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	// request.QueryStringParameters https://github.com/aws/aws-lambda-go/blob/main/events/apigw.go
+	started := time.Now()
 	feedURL := "http://feeds.nos.nl/nosnieuwsalgemeen"
 
 	docBytes := generateHTMLDoc(feedURL)
@@ -160,7 +161,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	encoded := base64.StdEncoding.EncodeToString(docBytes)
 	attachment.SetContent(encoded)
 	attachment.SetType("text/html")
-	attachment.SetFilename("NOS " + time.Now().Format("2006-01-02") + ".html")
+	attachment.SetFilename(title + ".html")
 	attachment.SetDisposition("attachment")
 
 	m.AddAttachment(attachment)
@@ -177,10 +178,15 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 		fmt.Println(resp.Headers)
 	}
 
+	respText := fmt.Sprintf(
+		"Generated %s and sent to your kindle in %s",
+		title,
+		time.Since(started),
+	)
 	return &events.APIGatewayProxyResponse{
 		StatusCode:      200,
 		Headers:         map[string]string{"Content-Type": "text/plain"},
-		Body:            "Sent to your kindle on " + time.Now().Format("2006-01-02"),
+		Body:            respText,
 		IsBase64Encoded: false,
 	}, nil
 }
