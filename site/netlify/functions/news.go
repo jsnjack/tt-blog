@@ -25,6 +25,7 @@ const docTemplate = `
 	</head>
 	<body>
 		<h2>Today, in the Netherlands:</h2>
+		<a id="start"></a>
 		{{range .Items}}
 			<ul>
 				<li>
@@ -37,10 +38,11 @@ const docTemplate = `
 		<mbp:pagebreak/>
 		{{range .Items}}
 			<article>
-				<a id={{.GUID}}></a>
+				<a id="{{.GUID}}"></a>
 				<h2>{{.Title}}</h2>
 				{{safeHTML .Description}}
 				<a href="{{.Link}}" target="_blank">Open the article</a>
+				<a href="#start">Home</a>
 				<mbp:pagebreak/>
 			</article>
 		{{end}}
@@ -111,7 +113,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	return &events.APIGatewayProxyResponse{
 		StatusCode:      200,
 		Headers:         map[string]string{"Content-Type": "text/plain"},
-		Body:            fmt.Sprintf("Collected %d articles", len(feed.Items)),
+		Body:            fmt.Sprintf("Collected %d articles and sent to your Kindle", len(feed.Items)),
 		IsBase64Encoded: false,
 	}, nil
 }
