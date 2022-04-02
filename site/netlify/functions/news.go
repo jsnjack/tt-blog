@@ -5,8 +5,12 @@ import (
 	"encoding/base64"
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"log"
+	"net/http"
+	"net/url"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -40,6 +44,7 @@ const docTemplate = `
 			<article>
 				<a id="{{.GUID}}"></a>
 				<h2>{{.Title}}</h2>
+				{{renderEnclosures .Enclosures}}
 				{{safeHTML .Description}}
 				<a href="{{.Link}}" target="_blank">Open the article</a>
 				<a href="#start">Home</a>
@@ -49,27 +54,86 @@ const docTemplate = `
 	</body>
 </html>`
 
+// safeHTML marks content as safe HTML, so it is not escaped
 func safeHTML(s string) template.HTML {
 	return template.HTML(s)
 }
 
-func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
-	// request.QueryStringParameters https://github.com/aws/aws-lambda-go/blob/main/events/apigw.go
+func renderEnclosures(en []*gofeed.Enclosure) template.HTML {
+	data := ""
+	for _, item := range en {
+		if strings.HasPrefix(item.Type, "image/") {
+			dataURL := toDataURL(item.URL)
+			if dataURL != "" {
+				data += fmt.Sprintf(`<img src="%s">\n`, dataURL)
+			}
+		}
+	}
+	return template.HTML(data)
+}
 
+//toBase64 downloads file and returns it as a data url
+func toDataURL(url string) string {
+	resp, err := http.Get(url)
+	if err != nil {
+		fmt.Printf("Unable to download %s: %s\n", url, err)
+		return ""
+	}
+
+	defer resp.Body.Close()
+
+	bytes, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Printf("Unable to read %s: %s\n", url, err)
+		return ""
+	}
+
+	encoded := fmt.Sprintf("data:%s;base64,%s", http.DetectContentType(bytes), base64.StdEncoding.EncodeToString(bytes))
+	return encoded
+}
+
+// generateHTMLDoc generates HTML document from RSS news feed
+func generateHTMLDoc(rssFeedURL string) []byte {
 	fp := gofeed.NewParser()
-	feed, err := fp.ParseURL("http://feeds.nos.nl/nosnieuwsalgemeen")
+	feed, err := fp.ParseURL(rssFeedURL)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	t := template.Must(template.New("news").Funcs(map[string]interface{}{"safeHTML": safeHTML}).Parse(docTemplate))
+	t := template.Must(template.New("news").Funcs(map[string]interface{}{
+		"safeHTML":         safeHTML,
+		"renderEnclosures": renderEnclosures,
+	}).Parse(docTemplate))
+
 	var buf bytes.Buffer
 	err = t.Execute(&buf, feed)
 	if err != nil {
 		log.Fatal(err)
 	}
+	return buf.Bytes()
+}
 
-	title := feed.Title + " " + feed.Published
+// extractDomain extracts domain from RSS URL
+func extractDomain(feedURL string) string {
+	u, err := url.Parse(feedURL)
+	if err != nil {
+		fmt.Println(err)
+		return "RSS feed"
+	}
+	splitted := strings.Split(u.Hostname(), ".")
+	if len(splitted) >= 2 {
+		return strings.Join(splitted[:len(splitted)-2], ".")
+	}
+	return "RSS feed"
+}
+
+func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+	// request.QueryStringParameters https://github.com/aws/aws-lambda-go/blob/main/events/apigw.go
+	feedURL := "http://feeds.nos.nl/nosnieuwsalgemeen"
+
+	docBytes := generateHTMLDoc(feedURL)
+
+	title := extractDomain(feedURL) + " " + time.Now().Format("2006-01-02")
 
 	// Sending email
 	m := mail.NewV3Mail()
@@ -90,7 +154,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	m.AddPersonalizations(personalization)
 
 	attachment := mail.NewAttachment()
-	encoded := base64.StdEncoding.EncodeToString(buf.Bytes())
+	encoded := base64.StdEncoding.EncodeToString(docBytes)
 	attachment.SetContent(encoded)
 	attachment.SetType("text/html")
 	attachment.SetFilename("NOS " + time.Now().Format("2006-01-02") + ".html")
@@ -113,7 +177,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	return &events.APIGatewayProxyResponse{
 		StatusCode:      200,
 		Headers:         map[string]string{"Content-Type": "text/plain"},
-		Body:            fmt.Sprintf("Collected %d articles and sent to your Kindle", len(feed.Items)),
+		Body:            "Sent to your kindle on " + time.Now().Format("2006-01-02"),
 		IsBase64Encoded: false,
 	}, nil
 }
