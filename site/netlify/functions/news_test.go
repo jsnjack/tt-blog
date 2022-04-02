@@ -15,3 +15,11 @@ func TestGenerateHTMLDoc(t *testing.T) {
 	}
 	exec.Command("xdg-open", "output.html").Start()
 }
+
+func TestExtractDomain(t *testing.T) {
+	result := extractDomain("http://feeds.nos.nl/nosnieuwsalgemeen")
+	expected := "nos.nl"
+	if result != expected {
+		t.Errorf("Got %s, expected %s", result, expected)
+	}
+}

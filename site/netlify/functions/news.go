@@ -125,7 +125,7 @@ func extractDomain(feedURL string) string {
 	}
 	splitted := strings.Split(u.Hostname(), ".")
 	if len(splitted) >= 2 {
-		return strings.Join(splitted[:len(splitted)-2], ".")
+		return strings.Join(splitted[len(splitted)-2:], ".")
 	}
 	return "RSS feed"
 }
