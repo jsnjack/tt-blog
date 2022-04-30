@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function(){
         }
 
         // ignore empty and short search queries
-        if (searchQuery.length === 0 || searchQuery.length < 3)
+        if (searchQuery.length === 0 || searchQuery.length < 2)
         {
             searchResults.style.display = "none";
             return;
