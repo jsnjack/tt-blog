@@ -12,7 +12,7 @@ sudo dnf install sysstat
 
 Install `ttyplot` to plot data and `kazy` to extract data with [grm](https://github.com/jsnjack/grm/)
 ```bash
-grm install jsnjack/kazy grm install tenox7/ttyplot
+grm install jsnjack/kazy tenox7/ttyplot
 ```
 
 Check available disk partitions with `df` command. nvme0n1 is used in example:
