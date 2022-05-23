@@ -6,5 +6,5 @@ tags: ["linux", "journalctl", "debug", "network"]
 ---
 
 ```bash
-journalctl -n 1000 | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}" | sort | uniq -c`
+journalctl -n 1000 | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}" | sort | uniq -c
 ```
