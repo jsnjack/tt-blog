@@ -7,12 +7,12 @@ tags: ["linux", "io", "disk"]
 
 Install `sysstat` package:
 ```bash
-sudo dnf install sysstat
+sudo dnf install sysstat -y
 ```
 
 Install `ttyplot` to plot data and `kazy` to extract data with [grm](https://github.com/jsnjack/grm/)
 ```bash
-grm install jsnjack/kazy tenox7/ttyplot
+grm install jsnjack/kazy-go tenox7/ttyplot
 ```
 
 Check available disk partitions with `df` command. nvme0n1 is used in example:
