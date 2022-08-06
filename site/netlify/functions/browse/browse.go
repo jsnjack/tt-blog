@@ -45,7 +45,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 
 	// Redirect user to surfly session
 	return &events.APIGatewayProxyResponse{
-		StatusCode:      201,
+		StatusCode:      303,
 		Headers:         map[string]string{"Location": fmt.Sprintf("%v", res["headless_link"])},
 		Body:            "",
 		IsBase64Encoded: false,
