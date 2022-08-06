@@ -1,7 +1,11 @@
 [build]
   base = "site/"
   publish = "public/"
-  command = "hugo --gc --minify && cd netlify/functions/news && go get ./... && CGO_ENABLED=0 go build -o ../news news.go"
+  command = """
+    hugo --gc --minify && cd netlify/functions/news && \
+    go get ./... && \
+    CGO_ENABLED=0 go build -o ../news news.go\
+  """
 
 [context.production.environment]
   HUGO_VERSION = "0.86.0"
