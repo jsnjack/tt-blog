@@ -2,9 +2,13 @@
   base = "site/"
   publish = "public/"
   command = """
-    hugo --gc --minify && cd netlify/functions/news && \
+    hugo --gc --minify && cd netlify/functions/ && \
+    cd news && \
     go get ./... && \
     CGO_ENABLED=0 go build -o ../news news.go\
+    cd ../browse && \
+    go get ./... && \
+    CGO_ENABLED=0 go build -o ../browse browse.go\
   """
 
 [context.production.environment]
