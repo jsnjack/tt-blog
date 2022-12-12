@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/base64"
 	"sort"
 	"strings"
 
@@ -65,14 +66,18 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 		}, err
 	}
 
-	contentType := "image/svg+xml"
 	if format == "png" {
-		contentType = "image/png"
+		return &events.APIGatewayProxyResponse{
+			StatusCode:      200,
+			Headers:         map[string]string{"Content-Type": "image/png"},
+			Body:            base64.StdEncoding.EncodeToString(data),
+			IsBase64Encoded: true,
+		}, nil
 	}
 
 	return &events.APIGatewayProxyResponse{
 		StatusCode:      200,
-		Headers:         map[string]string{"Content-Type": contentType},
+		Headers:         map[string]string{"Content-Type": "image/svg+xml"},
 		Body:            string(data),
 		IsBase64Encoded: false,
 	}, nil
