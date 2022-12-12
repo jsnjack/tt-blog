@@ -5,6 +5,8 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 
 	"github.com/vicanso/go-charts/v2"
 )
@@ -29,20 +31,10 @@ const topScoreName = "a+"
 
 func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	// request.QueryStringParameters https://github.com/aws/aws-lambda-go/blob/main/events/apigw.go
-	name := "Unknown person"
-	skills := make([]string, 0)
-	values := make([]float64, 0)
-	for key, value := range request.QueryStringParameters {
-		switch key {
-		case "name":
-			name = value
-		default:
-			skills = append(skills, key)
-			values = append(values, evaluationMap[strings.ToLower(value)])
-		}
-	}
 
-	data, err := generateSVG(name, skills, values)
+	name, skills, scores, legend := dataExtractor(request.QueryStringParameters)
+	data, err := generateSVG(name, skills, scores, legend)
+
 	if err != nil {
 		return &events.APIGatewayProxyResponse{
 			StatusCode:      503,
@@ -60,21 +52,29 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	}, nil
 }
 
-func generateSVG(name string, skills []string, values []float64) ([]byte, error) {
-	collection := make([][]float64, 0)
-	collection = append(collection, values)
-
+func generateSVG(name string, skills []string, scores [][]float64, legend []string) ([]byte, error) {
 	topScore := make([]float64, len(skills))
 	for i := 0; i < len(skills); i++ {
 		topScore[i] = evaluationMap[topScoreName]
 	}
 
-	p, err := charts.RadarRender(
-		collection,
+	options := make([]charts.OptionFunc, 0)
+	options = append(
+		options,
 		charts.TitleTextOptionFunc(name),
 		charts.RadarIndicatorOptionFunc(skills, topScore),
 		charts.SVGTypeOption(),
-		charts.PaddingOptionFunc(charts.Box{Top: 0, Right: 0, Bottom: 0, Left: 0}),
+	)
+	if len(legend) > 0 {
+		options = append(
+			options,
+			charts.LegendLabelsOptionFunc(legend),
+		)
+	}
+
+	p, err := charts.RadarRender(
+		scores,
+		options...,
 	)
 
 	if err != nil {
@@ -87,6 +87,43 @@ func generateSVG(name string, skills []string, values []float64) ([]byte, error)
 	}
 
 	return buf, nil
+}
+
+// dataExtractor extracts data from the provided query string parameters
+func dataExtractor(data map[string]string) (name string, skills []string, scores [][]float64, legend []string) {
+	name = "Unknown person"
+	skills = make([]string, 0)
+	evaluations := make([]string, 0)
+	legend = make([]string, 0)
+
+	for key, value := range data {
+		switch key {
+		case "name":
+			name = value
+		case "legend":
+			legend = strings.Split(value, ",")
+		default:
+			skills = append(skills, cases.Title(language.English, cases.NoLower).String(key))
+			evaluations = append(evaluations, value)
+		}
+	}
+
+	seriesNumber := 0
+	for _, ev := range evaluations {
+		num := len(strings.Split(ev, ","))
+		if num > seriesNumber {
+			seriesNumber = num
+		}
+	}
+	scores = make([][]float64, seriesNumber)
+
+	for _, ev := range evaluations {
+		for idx, val := range strings.Split(ev, ",") {
+			cleandVal := strings.TrimLeft(strings.ToLower(val), " ")
+			scores[idx] = append(scores[idx], evaluationMap[cleandVal])
+		}
+	}
+	return
 }
 
 func main() {

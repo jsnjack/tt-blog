@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/aws/aws-lambda-go v1.36.0
 	github.com/vicanso/go-charts/v2 v2.5.4
+	golang.org/x/text v0.5.0
 )
 
 require (
