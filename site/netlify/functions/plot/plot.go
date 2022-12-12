@@ -40,8 +40,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 <skill> - the name of the skill, e.g. "quality";
 <score> - the score of the skill, e.g. "A-", "A", "A+", "B-", "B", "B+", "C", "C+", "C-";
           multiple comma separated scores are supported, e.g. "A-,B+";
-		  the top score is "a+"; the bottom score is "c-";
-		  the score is case insensitive, e.g. "a+" and "A+" are the same;
+          the score is case insensitive, e.g. "a+" and "A+" are the same;
 <legend> - (optional) the legend of the chart, if multiple comma separated scores are provided, e.g. "Q1 2022,Q2 2022"
 		`
 		return &events.APIGatewayProxyResponse{
