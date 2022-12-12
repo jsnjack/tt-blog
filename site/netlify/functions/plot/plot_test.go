@@ -8,11 +8,12 @@ import (
 )
 
 func TestGenerateSVG1(t *testing.T) {
-	data, err := generateSVG(
+	data, err := generateImage(
 		"Amy Pond",
 		[]string{"Quality", "Ownership", "Speed", "Independence", "Team work", "Reliability"},
 		[][]float64{{5, 8, 7, 9, 7, 9}},
 		nil,
+		"svg",
 	)
 	if err != nil {
 		t.Error(err)
@@ -27,11 +28,12 @@ func TestGenerateSVG1(t *testing.T) {
 }
 
 func TestGenerateSVG2(t *testing.T) {
-	data, err := generateSVG(
+	data, err := generateImage(
 		"Amy Pond",
 		[]string{"Quality", "Ownership", "Speed", "Independence", "Team work", "Reliability"},
 		[][]float64{{9, 8, 7, 6, 7, 8}, {5, 8, 7, 9, 7, 9}},
 		[]string{"Q1", "Q2"},
+		"svg",
 	)
 	if err != nil {
 		t.Error(err)
@@ -45,13 +47,33 @@ func TestGenerateSVG2(t *testing.T) {
 	exec.Command("xdg-open", "output2.svg").Start()
 }
 
+func TestGeneratePNG(t *testing.T) {
+	data, err := generateImage(
+		"Amy Pond",
+		[]string{"Quality", "Ownership", "Speed", "Independence", "Team work", "Reliability"},
+		[][]float64{{9, 8, 7, 6, 7, 8}, {5, 8, 7, 9, 7, 9}},
+		[]string{"Q1", "Q2"},
+		"png",
+	)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	err = os.WriteFile("output1.png", data, 0644)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	exec.Command("xdg-open", "output1.png").Start()
+}
+
 func TestDataExtractor1(t *testing.T) {
 	data := map[string]string{
 		"name":      "Amy Pond",
 		"quality":   "a+",
 		"Ownership": "A",
 	}
-	name, skills, scores, legend := dataExtractor(data)
+	name, skills, scores, legend, format := dataExtractor(data)
 	if name != "Amy Pond" {
 		t.Error("expected Amy Pond, got", name)
 		return
@@ -80,13 +102,17 @@ func TestDataExtractor1(t *testing.T) {
 		t.Error("expected 0 legend, got", len(legend))
 		return
 	}
+	if format != "svg" {
+		t.Error("expected svg, got", format)
+		return
+	}
 }
 func TestDataExtractor2(t *testing.T) {
 	data := map[string]string{
 		"name":    "Amy Pond",
 		"quality": "a, b",
 	}
-	name, skills, scores, legend := dataExtractor(data)
+	name, skills, scores, legend, format := dataExtractor(data)
 	if name != "Amy Pond" {
 		t.Error("name is not correct")
 		return
@@ -115,7 +141,10 @@ func TestDataExtractor2(t *testing.T) {
 		t.Error("expected 0 legend, got", len(legend))
 		return
 	}
-
+	if format != "svg" {
+		t.Error("expected svg, got", format)
+		return
+	}
 }
 
 func TestDataExtractor3(t *testing.T) {
@@ -123,8 +152,9 @@ func TestDataExtractor3(t *testing.T) {
 		"name":    "Amy Pond",
 		"quality": "a,b",
 		"speed":   "a",
+		"type":    "png",
 	}
-	name, skills, scores, legend := dataExtractor(data)
+	name, skills, scores, legend, format := dataExtractor(data)
 	if name != "Amy Pond" {
 		t.Error("name is not correct")
 		return
@@ -155,6 +185,10 @@ func TestDataExtractor3(t *testing.T) {
 	}
 	if len(legend) != 0 {
 		t.Error("expected 0 legend, got", len(legend))
+		return
+	}
+	if format != "png" {
+		t.Error("expected png, got", format)
 		return
 	}
 }

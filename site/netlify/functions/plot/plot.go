@@ -43,6 +43,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
           multiple comma separated scores are supported, e.g. "A-,B+";
           the score is case insensitive, e.g. "a+" and "A+" are the same;
 <legend> - (optional) the legend of the chart, if multiple comma separated scores are provided, e.g. "Q1 2022,Q2 2022"
+<type> - (optional) image format. Default is svg. Supported values are svg, png
 		`
 		return &events.APIGatewayProxyResponse{
 			StatusCode:      400,
@@ -52,8 +53,8 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 		}, nil
 	}
 
-	name, skills, scores, legend := dataExtractor(request.QueryStringParameters)
-	data, err := generateSVG(name, skills, scores, legend)
+	name, skills, scores, legend, format := dataExtractor(request.QueryStringParameters)
+	data, err := generateImage(name, skills, scores, legend, format)
 
 	if err != nil {
 		return &events.APIGatewayProxyResponse{
@@ -64,15 +65,20 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 		}, err
 	}
 
+	contentType := "image/svg+xml"
+	if format == "png" {
+		contentType = "image/png"
+	}
+
 	return &events.APIGatewayProxyResponse{
 		StatusCode:      200,
-		Headers:         map[string]string{"Content-Type": "image/svg+xml"},
+		Headers:         map[string]string{"Content-Type": contentType},
 		Body:            string(data),
 		IsBase64Encoded: false,
 	}, nil
 }
 
-func generateSVG(name string, skills []string, scores [][]float64, legend []string) ([]byte, error) {
+func generateImage(name string, skills []string, scores [][]float64, legend []string, format string) ([]byte, error) {
 	topScore := make([]float64, len(skills))
 	for i := 0; i < len(skills); i++ {
 		topScore[i] = evaluationMap[topScoreName]
@@ -83,13 +89,13 @@ func generateSVG(name string, skills []string, scores [][]float64, legend []stri
 		options,
 		charts.TitleTextOptionFunc(name),
 		charts.RadarIndicatorOptionFunc(skills, topScore),
-		charts.SVGTypeOption(),
 	)
 	if len(legend) > 0 {
-		options = append(
-			options,
-			charts.LegendLabelsOptionFunc(legend),
-		)
+		options = append(options, charts.LegendLabelsOptionFunc(legend))
+	}
+
+	if format == "svg" {
+		options = append(options, charts.SVGTypeOption())
 	}
 
 	p, err := charts.RadarRender(
@@ -110,8 +116,9 @@ func generateSVG(name string, skills []string, scores [][]float64, legend []stri
 }
 
 // dataExtractor extracts data from the provided query string parameters
-func dataExtractor(data map[string]string) (name string, skills []string, scores [][]float64, legend []string) {
+func dataExtractor(data map[string]string) (name string, skills []string, scores [][]float64, legend []string, format string) {
 	name = "Unknown person"
+	format = "svg"
 	skills = make([]string, 0)
 	evaluations := make([]string, 0)
 	legend = make([]string, 0)
@@ -130,6 +137,8 @@ func dataExtractor(data map[string]string) (name string, skills []string, scores
 			name = data[key]
 		case "legend":
 			legend = strings.Split(data[key], ",")
+		case "type":
+			format = data[key]
 		default:
 			skills = append(skills, cases.Title(language.English, cases.NoLower).String(key))
 			evaluations = append(evaluations, data[key])
