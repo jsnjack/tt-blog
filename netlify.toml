@@ -8,7 +8,7 @@
     CGO_ENABLED=0 go build -o ../news news.go && \
     cd ../browse && \
     go get ./... && \
-    CGO_ENABLED=0 go build -o ../browse browse.go &&\
+    CGO_ENABLED=0 go build -o ../browse browse.go && \
     cd ../plot && \
     go get ./... && \
     CGO_ENABLED=0 go build -o ../plot plot.go\
