@@ -45,6 +45,10 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
           the score is case insensitive, e.g. "a+" and "A+" are the same;
 <legend> - (optional) the legend of the chart, if multiple comma separated scores are provided, e.g. "Q1 2022,Q2 2022"
 <type> - (optional) image format. Default is svg. Supported values are svg, png
+
+Examples:
+plot?name=Amy+Pond&Quality=A+&Ownership=A&Speed=A-&Independence=B+&Team work=B+&Reliability=B-
+plot?name=Amy+Pond&Quality=A+,A+&Ownership=A,A&Speed=A-,A&Independence=B+,A-&Team work=B+,B+&Reliability=B-,B+&legend=2021,2022&type=png
 		`
 		return &events.APIGatewayProxyResponse{
 			StatusCode:      400,
