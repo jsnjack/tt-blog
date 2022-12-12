@@ -1,6 +1,7 @@
 package main
 
 import (
+	"sort"
 	"strings"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -115,15 +116,23 @@ func dataExtractor(data map[string]string) (name string, skills []string, scores
 	evaluations := make([]string, 0)
 	legend = make([]string, 0)
 
-	for key, value := range data {
+	// Sort the keys to preserve the order of the skills
+	keySlice := make([]string, 0)
+	for k := range data {
+		keySlice = append(keySlice, k)
+	}
+
+	sort.Strings(keySlice)
+
+	for _, key := range keySlice {
 		switch key {
 		case "name":
-			name = value
+			name = data[key]
 		case "legend":
-			legend = strings.Split(value, ",")
+			legend = strings.Split(data[key], ",")
 		default:
 			skills = append(skills, cases.Title(language.English, cases.NoLower).String(key))
-			evaluations = append(evaluations, value)
+			evaluations = append(evaluations, data[key])
 		}
 	}
 

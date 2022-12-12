@@ -11,19 +11,19 @@ func TestGenerateSVG1(t *testing.T) {
 	data, err := generateSVG(
 		"Amy Pond",
 		[]string{"Quality", "Ownership", "Speed", "Independence", "Team work", "Reliability"},
-		[][]float64{{9, 8, 7, 6, 7, 8}, {5, 8, 7, 9, 7, 9}},
+		[][]float64{{5, 8, 7, 9, 7, 9}},
 		nil,
 	)
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	err = os.WriteFile("output.svg", data, 0644)
+	err = os.WriteFile("output1.svg", data, 0644)
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	exec.Command("xdg-open", "output.svg").Start()
+	exec.Command("xdg-open", "output1.svg").Start()
 }
 
 func TestGenerateSVG2(t *testing.T) {
@@ -37,12 +37,12 @@ func TestGenerateSVG2(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	err = os.WriteFile("output.svg", data, 0644)
+	err = os.WriteFile("output2.svg", data, 0644)
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	exec.Command("xdg-open", "output.svg").Start()
+	exec.Command("xdg-open", "output2.svg").Start()
 }
 
 func TestDataExtractor1(t *testing.T) {
@@ -57,23 +57,23 @@ func TestDataExtractor1(t *testing.T) {
 		return
 	}
 	if len(skills) != 2 {
-		t.Error("expected 2 skills, got", len(skills))
+		t.Error("expected 2 skills, got", len(skills), skills)
 		return
 	}
-	if skills[0] != "Quality" {
-		t.Error("expected Quality, got", skills[0])
-		return
-	}
-	if skills[1] != "Ownership" {
+	if skills[0] != "Ownership" {
 		t.Error("expected Ownership, got", skills[1])
+		return
+	}
+	if skills[1] != "Quality" {
+		t.Error("expected Quality, got", skills[0])
 		return
 	}
 	if len(scores) != 1 {
 		t.Error("expected 1 score, got", len(scores))
 		return
 	}
-	if fmt.Sprintf("%v", scores[0]) != "[9 8]" {
-		t.Error("expected [9 8], got", scores[0])
+	if fmt.Sprintf("%v", scores[0]) != "[8 9]" {
+		t.Error("expected [8 9], got", scores[0])
 		return
 	}
 	if len(legend) != 0 {
