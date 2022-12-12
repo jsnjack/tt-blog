@@ -32,6 +32,26 @@ const topScoreName = "a+"
 func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	// request.QueryStringParameters https://github.com/aws/aws-lambda-go/blob/main/events/apigw.go
 
+	// help request
+	if len(request.QueryStringParameters) == 0 {
+		helpMsg := `Usage: /plot?name=<name>&[legend=<legend,...>]&<skill>=<score[,score,...]>[&<skill>=<score[,score,...]>]...
+
+<name> - the name of the person, e.g. "Amy Pond";
+<skill> - the name of the skill, e.g. "quality";
+<score> - the score of the skill, e.g. "A-", "A", "A+", "B-", "B", "B+", "C", "C+", "C-";
+          multiple comma separated scores are supported, e.g. "A-,B+";
+		  the top score is "a+"; the bottom score is "c-";
+		  the score is case insensitive, e.g. "a+" and "A+" are the same;
+<legend> - (optional) the legend of the chart, if multiple comma separated scores are provided, e.g. "Q1 2022,Q2 2022"
+		`
+		return &events.APIGatewayProxyResponse{
+			StatusCode:      400,
+			Headers:         map[string]string{"Content-Type": "text/plain"},
+			Body:            helpMsg,
+			IsBase64Encoded: false,
+		}, nil
+	}
+
 	name, skills, scores, legend := dataExtractor(request.QueryStringParameters)
 	data, err := generateSVG(name, skills, scores, legend)
 
