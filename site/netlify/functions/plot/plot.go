@@ -1,25 +1,31 @@
 package main
 
 import (
+	"strings"
+
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 
 	"github.com/vicanso/go-charts/v2"
 )
 
+// evaluationMap is a map of evaluation to score. Note, browsers encode + as a space
 var evaluationMap = map[string]float64{
-	"C-": 1.0,
-	"C":  2.0,
-	"C+": 3.0,
-	"B-": 4.0,
-	"B":  5.0,
-	"B+": 6.0,
-	"A-": 7.0,
-	"A":  8.0,
-	"A+": 9.0,
+	"c-": 1.0,
+	"c":  2.0,
+	"c+": 3.0,
+	"c ": 3.0,
+	"b-": 4.0,
+	"b":  5.0,
+	"b+": 6.0,
+	"b ": 6.0,
+	"a-": 7.0,
+	"a":  8.0,
+	"a+": 9.0,
+	"a ": 9.0,
 }
 
-const topScoreName = "A+"
+const topScoreName = "a+"
 
 func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	// request.QueryStringParameters https://github.com/aws/aws-lambda-go/blob/main/events/apigw.go
@@ -32,7 +38,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 			name = value
 		default:
 			skills = append(skills, key)
-			values = append(values, evaluationMap[value])
+			values = append(values, evaluationMap[strings.ToLower(value)])
 		}
 	}
 
