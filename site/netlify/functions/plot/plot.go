@@ -34,14 +34,14 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 <name> - the name of the person, e.g. "Amy Pond";
 <skill> - the name of the skill, e.g. "quality";
 <score> - the score of the skill, e.g. "A", "A+", "B", "C";
-          multiple comma separated scores are supported, e.g. "A-,B+";
+          multiple comma separated scores are supported, e.g. "A,B";
           the score is case insensitive, e.g. "a+" and "A+" are the same;
 <legend> - (optional) the legend of the chart, if multiple comma separated scores are provided, e.g. "Q1 2022,Q2 2022"
 <type> - (optional) image format. Default is svg. Supported values are svg, png
 
 Examples:
-plot?name=Amy+Pond&Quality=A+&Ownership=A&Speed=A-&Independence=B+&Team work=B+&Reliability=B-
-plot?name=Amy+Pond&Quality=A+,A+&Ownership=A,A&Speed=A-,A&Independence=B+,A-&Team work=B+,B+&Reliability=B-,B+&legend=2021,2022&type=png
+plot?name=Amy+Pond&effectiveness=a&independance=a&ownership=a&quality=a+&strategic=a&structured=b&teamwork=b&trust=a
+plot?name=Amy+Pond&effectiveness=a,a&independance=a,a+&ownership=a,a&quality=a+,a&strategic=a,a&structured=b,a&teamwork=b,a&trust=a,a&legend=2021,2022&type=png
 		`
 		return &events.APIGatewayProxyResponse{
 			StatusCode:      400,
