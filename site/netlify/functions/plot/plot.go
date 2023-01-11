@@ -15,18 +15,11 @@ import (
 
 // evaluationMap is a map of evaluation to score. Note, browsers encode + as a space
 var evaluationMap = map[string]float64{
-	"c-": 1.0,
-	"c":  2.0,
-	"c+": 3.0,
-	"c ": 3.0,
-	"b-": 4.0,
-	"b":  5.0,
-	"b+": 6.0,
-	"b ": 6.0,
-	"a-": 7.0,
-	"a":  8.0,
-	"a+": 9.0,
-	"a ": 9.0,
+	"c":  1.0,
+	"b":  2.0,
+	"a":  3.0,
+	"a+": 4.0,
+	"a ": 4.0,
 }
 
 const topScoreName = "a+"
@@ -40,7 +33,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 
 <name> - the name of the person, e.g. "Amy Pond";
 <skill> - the name of the skill, e.g. "quality";
-<score> - the score of the skill, e.g. "A-", "A", "A+", "B-", "B", "B+", "C", "C+", "C-";
+<score> - the score of the skill, e.g. "A", "A+", "B", "C";
           multiple comma separated scores are supported, e.g. "A-,B+";
           the score is case insensitive, e.g. "a+" and "A+" are the same;
 <legend> - (optional) the legend of the chart, if multiple comma separated scores are provided, e.g. "Q1 2022,Q2 2022"
