@@ -40,8 +40,8 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 <type> - (optional) image format. Default is svg. Supported values are svg, png
 
 Examples:
-plot?name=Amy+Pond&effectiveness=a&independance=a&ownership=a&quality=a+&strategic=a&structured=b&teamwork=b&trust=a
-plot?name=Amy+Pond&effectiveness=a,a&independance=a,a+&ownership=a,a&quality=a+,a&strategic=a,a&structured=b,a&teamwork=b,a&trust=a,a&legend=2021,2022&type=png
+plot?name=Amy+Pond&ownership=a&structured=a&trust=a&strategic=a+&independence=a&quality=b&effectiveness=b&teamwork=a
+plot?name=Amy+Pond&ownership=a,a&structured=a,a+&trust=a,a&strategic=a+,a&independence=a,a&quality=b,a&effectiveness=b,a&teamwork=a,a&legend=2021,2022&type=png
 		`
 		return &events.APIGatewayProxyResponse{
 			StatusCode:      400,
