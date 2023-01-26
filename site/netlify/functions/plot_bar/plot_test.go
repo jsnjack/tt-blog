@@ -9,7 +9,7 @@ import (
 
 func TestGenerateSVG1(t *testing.T) {
 	chData := &ChartData{
-		Title:  "Test Chart",
+		Title:  "Haproxy\nresponse durartion",
 		Legend: []string{"min", "max", "p99"},
 		Keys:   []string{"haproxy1.8", "haproxy2.1"},
 		Values: [][]float64{
@@ -51,9 +51,8 @@ func TestParseQuery(t *testing.T) {
 		Legend: []string{"min", "max", "p99"},
 		Keys:   []string{"haproxy18", "haproxy20"},
 		Values: [][]float64{
-			{10, 9},
-			{20, 20},
-			{19, 17},
+			{10, 20, 19},
+			{9, 20, 17},
 		},
 		Format: "png",
 		Type:   "bar",

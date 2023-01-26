@@ -21,7 +21,7 @@ const helpMsg = `Usage: /plot_bar?type=<{bar}>&[title=<str>]&[legend=<str1[,...]
 <format> - (optional) image format. Default is svg. Supported values are svg, png
 
 Examples:
-/plot_bar?type=svg&title=Haproxy+response+duration&legend=min,max,p99&haproxy18=10,20,19&haproxy20=9,20,17&format=png
+/plot_bar?type=bar&title=Haproxy+response+duration&legend=min,max,p99&haproxy18=10,20,19&haproxy20=9,20,17&format=png
 `
 
 type ChartData struct {
@@ -116,15 +116,14 @@ func parseQuery(data map[string]string) (*ChartData, error) {
 		default:
 			// If the key is not one of the above, add it to the keys list
 			cd.Keys = append(cd.Keys, key)
-			for idx, v := range strings.Split(data[key], ",") {
-				floatV, err := strconv.ParseFloat(v, 64)
+			cd.Values = append(cd.Values, []float64{})
+			values := strings.Split(data[key], ",")
+			for _, v := range values {
+				floatValue, err := strconv.ParseFloat(v, 64)
 				if err != nil {
 					return nil, err
 				}
-				if len(cd.Values) < idx+1 {
-					cd.Values = append(cd.Values, make([]float64, 0))
-				}
-				cd.Values[idx] = append(cd.Values[idx], floatV)
+				cd.Values[len(cd.Values)-1] = append(cd.Values[len(cd.Values)-1], floatValue)
 			}
 		}
 	}
