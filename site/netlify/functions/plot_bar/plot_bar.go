@@ -119,7 +119,8 @@ func parseQuery(data map[string]string) (*ChartData, error) {
 			cd.Values = append(cd.Values, []float64{})
 			values := strings.Split(data[key], ",")
 			for _, v := range values {
-				floatValue, err := strconv.ParseFloat(v, 64)
+				normalizedValue := strings.TrimSpace(v)
+				floatValue, err := strconv.ParseFloat(normalizedValue, 64)
 				if err != nil {
 					return nil, err
 				}
