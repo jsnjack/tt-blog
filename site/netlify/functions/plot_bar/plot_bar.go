@@ -139,7 +139,14 @@ func generateImage(cd *ChartData) ([]byte, error) {
 		charts.TitleTextOptionFunc(cd.Title),
 	)
 	if len(cd.Keys) > 0 {
-		options = append(options, charts.LegendLabelsOptionFunc(cd.Keys))
+		options = append(options, charts.LegendOptionFunc(charts.LegendOption{
+			Data: cd.Keys,
+			Left: "100%",
+			Padding: charts.Box{
+				Bottom: 30,
+				Top:    10,
+			},
+		}))
 	}
 
 	if cd.Format == "svg" {

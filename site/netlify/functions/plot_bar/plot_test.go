@@ -32,6 +32,34 @@ func TestGenerateSVG1(t *testing.T) {
 	exec.Command("xdg-open", "output1.svg").Start()
 }
 
+func TestGenerateSVG2(t *testing.T) {
+	chData := &ChartData{
+		Title:  "vcu 10",
+		Legend: []string{"min"},
+		Keys:   []string{"http_healthcheck", "https_invalid_servername", "https_invalid_subdomain", "https_robots", "proxified_request"},
+		Values: [][]float64{
+			{10},
+			{20},
+			{10},
+			{20},
+			{10},
+		},
+		Format: "svg",
+		Type:   "bar",
+	}
+	data, err := generateImage(chData)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	err = os.WriteFile("output1.svg", data, 0644)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	exec.Command("xdg-open", "output1.svg").Start()
+}
+
 func TestParseQuery(t *testing.T) {
 	parsedQueryMap := map[string]string{
 		"type":      "bar",
