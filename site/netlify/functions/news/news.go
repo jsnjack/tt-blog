@@ -75,7 +75,7 @@ func renderEnclosures(en []*gofeed.Enclosure) template.HTML {
 	return template.HTML(data)
 }
 
-//toBase64 downloads file and returns it as a data url
+// toBase64 downloads file and returns it as a data url
 func toDataURL(url string) string {
 	resp, err := http.Get(url)
 	if err != nil {
@@ -142,7 +142,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	// Sending email
 	m := mail.NewV3Mail()
 
-	from := mail.NewEmail("Yauhen's Netlify", "noreply@yauhen.space")
+	from := mail.NewEmail("Yauhen's Netlify", "noreply@yauhen.cc")
 	content := mail.NewContent("text/html", title)
 	to := mail.NewEmail("Yauhen", "jsnjack@kindle.com")
 
