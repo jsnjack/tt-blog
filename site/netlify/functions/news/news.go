@@ -21,6 +21,7 @@ import (
 )
 
 const docTemplate = `
+{{ define "inc" }}{{ len (printf "%*s " . "") }}{{ end -}}
 <!DOCTYPE html>
 <html>
 	<head>
@@ -40,15 +41,21 @@ const docTemplate = `
 			No news today. Has the World ended?
 		{{end}}
 		<mbp:pagebreak/>
-		{{range .Items}}
+		{{range $index, $element := .Items}}
 			<article>
-				<a id="{{.GUID}}"></a>
-				<h2>{{.Title}}</h2>
-				{{renderEnclosures .Enclosures}}
-				{{safeHTML .Description}}
+				<a id="{{$element.GUID}}"></a>
+				<h2>{{$element.Title}}</h2>
+				{{$nextIndex := inc $index}}
+				{{if lt $nextIndex (len $.Items)}}
+					{{$nextEl := index $.Items $nextIndex}}
+					<a href="#{{$nextEl.GUID}}">Next article</a>
+					<br/>
+				{{end}}
+				{{renderEnclosures $element.Enclosures}}
+				{{safeHTML $element.Description}}
 				<dl>
 					<dt>Navigate:</dt>
-					<dd><a href="{{.Link}}" target="_blank">Open the article online</a></dd>
+					<dd><a href="{{$element.Link}}" target="_blank">Open the article online</a></dd>
 					<dd><a href="#start">Home</a></dd>
 				</dl>
 				<mbp:pagebreak/>
@@ -106,6 +113,9 @@ func generateHTMLDoc(rssFeedURL string) []byte {
 	t := template.Must(template.New("news").Funcs(map[string]interface{}{
 		"safeHTML":         safeHTML,
 		"renderEnclosures": renderEnclosures,
+		"inc": func(i int) int {
+			return i + 1
+		},
 	}).Parse(docTemplate))
 
 	var buf bytes.Buffer
