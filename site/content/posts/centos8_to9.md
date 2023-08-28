@@ -15,7 +15,12 @@ sudo dnf install https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Pack
 sudo dnf --releasever=9 --allowerasing --setopt=deltarpm=false distro-sync -y
 ```
 
-3. Reboot and verify
+3. Rebuild RPM database (this will chnage the backend to sqlite):
+```bash
+sudo rpm --rebuilddb
+```
+
+4. Reboot and verify
 ```bash
 cat /etc/redhat-release
 ```
