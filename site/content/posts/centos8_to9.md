@@ -5,39 +5,49 @@ draft: false
 tags: ["linux", "centos"]
 ---
 
-1. Install CentOS 9 repositories. All CentOS 9 packages are listed [here](https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/)
+1. Update OS
 ```bash
-sudo dnf install https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-stream-release-9.0-22.el9.noarch.rpm https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-9.0-22.el9.noarch.rpm https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-stream-repos-9.0-22.el9.noarch.rpm
+dnf update -y
 ```
 
-2. Run command to switch packages:
+2. Reboot system if there were any updates
 ```bash
-sudo dnf --releasever=9 --allowerasing --setopt=deltarpm=false distro-sync -y
+reboot
 ```
 
-3. Rebuild RPM database (this will chnage the backend to sqlite):
+3. Disable CentOS 8-specific modules (they are blocking kernel updates)
 ```bash
-sudo rpm --rebuilddb
+dnf module disable python36 virt
 ```
 
-4. Disable 8-specific modules (they are blocking kernel updates)
+4. Install CentOS 9 repositories. All CentOS 9 packages are listed [here](https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/)
 ```bash
-sudo dnf module disable python36 virt
+dnf install https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-stream-release-9.0-22.el9.noarch.rpm https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-9.0-22.el9.noarch.rpm https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/centos-stream-repos-9.0-22.el9.noarch.rpm
 ```
 
-5. Disable subscription manager. Open file `/etc/yum/pluginconf.d/subscription-manager.conf` and set enabled to `0`
+5. Run command to switch packages:
+```bash
+dnf --releasever=9 --allowerasing --setopt=deltarpm=false distro-sync -y
+```
 
-6. Reboot and verify
+6. Rebuild RPM database (this will chnage the backend to sqlite):
+```bash
+rpm --rebuilddb
+```
+
+7. Disable subscription manager. Open file `/etc/yum/pluginconf.d/subscription-manager.conf` and set enabled to `0`
+
+8. Reboot and verify
 ```bash
 cat /etc/redhat-release
 ```
 
-7. Verify that the latest kernel is used
+9. Verify that the latest kernel is used (5.14+)
 ```bash
 uname -a
 ```
 
-8. If not, use grubby to set the latest kernel as the default one, reboot the system and remove old kernels from CentOS 8:
+10. If not, use grubby to set the latest kernel as the default one, reboot the system and remove old kernels from CentOS 8:
 ```bash
 # List all boot options
 grubby --info=ALL
@@ -48,9 +58,9 @@ grubby --set-default vmlinuz-<version>.<arch>
 # Make sure the index is also set in `/etc/default/grub` file
 
 # Regenerate boot configuration
-sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+grub2-mkconfig -o /boot/grub2/grub.cfg
 
-sudo reboot
+reboot
 
 # Remove old kernels...
 ```
