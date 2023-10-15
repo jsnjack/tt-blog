@@ -1,5 +1,5 @@
 ---
-title: "How to use Android phone camera on desktop computer via WiFi"
+title: "How to use Android phone camera on desktop computer via WiFi with DroidCam"
 date: 2023-08-02T09:39:57+02:00
 draft: false
 tags: ["linux", "fedora", "camera"]
