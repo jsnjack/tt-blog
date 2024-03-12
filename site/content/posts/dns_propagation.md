@@ -5,4 +5,4 @@ draft: false
 tags: ["linux", "dns", "debug"]
 ---
 
-Service from Constellix: [DNS Propagation](https://dnstoolbox.io/Propagation/A/8.8.8.8/surfly.com/undefined)
+Service from Constellix: [DNS Propagation](https://dnstoolbox.io/)
