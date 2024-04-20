@@ -24,3 +24,6 @@ akmods --kernels $(uname-r) --rebuild
 ```bash
 ffmpeg -i http://192.168.2.26:8080/videofeed -vf format=yuv420p -f v4l2 /dev/video0
 ```
+
+> If for some reason `v4l2loopback` module is not compiled correctly, you can try
+> to compile it manually by following [this instruction](https://github.com/seii/fedora-green-screen/blob/master/README.md#installing-v4l2loopback)
