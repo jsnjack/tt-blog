@@ -16,7 +16,7 @@ lsmod | grep v4l2loopback
 ```
 4. If it is not loaded, run this command:
 ```bash
-akmods --kernels $(uname-r) --rebuild
+akmods --kernels $(uname -r) --rebuild
 # Confirm that it was loaded
 ```
 4. On mobile phone, start the application and select "Start server" from the menu. Select also "Fade" option to set minimal brightness of the mobile phone screen.
