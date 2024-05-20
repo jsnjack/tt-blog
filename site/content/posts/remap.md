@@ -7,7 +7,7 @@ tags: ["linux", "logitech"]
 
 In Europe, Logitech only sells keyboards with ISO layout. This means that there
 is an additional key between the left shift and Z. This key is often in the way
-if you are used to the US layout (ANSI layout). [Solaar](./logitech_mx_mini.md)
+if you are used to the US layout (ANSI layout). [Solaar](/posts/logitech_mx_mini/)
 does not allow you to remap this key.
 
 1. Install evtest:
