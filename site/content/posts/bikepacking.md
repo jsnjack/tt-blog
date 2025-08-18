@@ -5,20 +5,20 @@ draft: false
 tags: ["cycling", "bikepacking"]
 ---
 
-## Essentials
-### Clothing warm weather (20°C+)
+#### Essentials
+##### Clothing warm weather (20°C+)
 - Shorts x1
 - T-shirt x1
 - Underwear x2
 - Light shoes x1
 
-### Clothing colder weather (15°C)
+##### Add for colder weather (15°C)
 - Base layer x2
 - Waterproof jacket x1
 - Trousers x1
 - Socks x2
 
-### Accessories
+##### Accessories
 - Sun cream x1
 - Deodorant x1
 - Chamois cream x1
@@ -28,13 +28,13 @@ tags: ["cycling", "bikepacking"]
 - Warm cream x1
 - Earplugs x1
 
-## First Aid
+#### First Aid
 - Anti-allergy medication x1
 - Pain reliever x1
 - Plasters x1
 - Daily medication x1
 
-## Electronics
+#### Electronics
 - Lights (front and rear) x1
 - Charger USB-C x1
 - Charging cable x1
@@ -42,14 +42,14 @@ tags: ["cycling", "bikepacking"]
 - Power bank x1
 - Headphones x1
 
-## Tools
+#### Tools
 - Lock x1
 - Pump x1
 - Spare tube x1
 - Multi-tool x1
 - Tire levers x1
 
-## Important Documents
+#### Important Documents
 - Driving license
 - ID card
 - OV-chipkaart
