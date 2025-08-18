@@ -1,7 +1,7 @@
 body {
     padding-top: 10px;
     padding-bottom: 10px;
-    font-family: sans-serif;
+    font-family: monospace;
 }
 
 .sidebar {
@@ -10,9 +10,20 @@ body {
 
 .sidebar-tags {
     line-height: 2;
+
     .tag-letter {
         text-transform: uppercase;
         color: gray;
+    }
+
+    a.tag {
+        text-decoration: none;
+
+        &:hover {
+            background: $primary-color;
+            color: $light-color;
+            border-radius: 0.2em;
+        }
     }
 }
 
@@ -20,32 +31,39 @@ body {
     .post-title {
         margin-bottom: 1em;
     }
+
     .in-post-summary {
         font-size: 80%;
         padding-bottom: 1em;
     }
+
     .in-post-tag {
         border: 0.1em solid $primary-color;
         border-radius: 0.3em;
         padding: 3px 6px 3px 6px;
         margin-left: 3px;
-        text-decoration:none;
+        text-decoration: none;
+
         &:hover {
             background: $primary-color;
             color: $light-color;
         }
     }
+
     .post-content {
         a {
             text-decoration: underline;
         }
     }
+
     pre {
         overflow-x: auto;
         line-height: normal;
         padding: 1.5em 0.5em 1.5em 0.5em;
         border-radius: 0.3em;
+        font-size: small;
     }
+
     border-left: 0.12em solid grey;
     padding-left: 1em;
 }
@@ -65,9 +83,11 @@ body {
 #search-query {
     width: 100%;
 }
-#search-results{
+
+#search-results {
     font-size: 80%;
     word-wrap: anywhere;
+
     .search-summary {
         background-color: whitesmoke;
         padding: 0.2em;
@@ -79,6 +99,6 @@ body {
     color: $primary-color;
 }
 
-a:visited{
+a:visited {
     color: $primary-color;
 }
