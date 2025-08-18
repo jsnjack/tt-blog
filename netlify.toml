@@ -1,7 +1,7 @@
 [build]
-  base = "site/"
-  publish = "public/"
-  command = """
+base = "site/"
+publish = "public/"
+command = """
     hugo --gc --minify && cd netlify/functions/ && \
     cd news && go get ./... && CGO_ENABLED=0 go build -o ../news news.go && cd .. && \
     cd browse && go get ./... && CGO_ENABLED=0 go build -o ../browse browse.go && cd .. && \
@@ -11,7 +11,7 @@
   """
 
 [context.production.environment]
-  HUGO_VERSION = "0.86.0"
-  HUGO_ENV = "production"
-  HUGO_ENABLEGITINFO = "true"
-  GO_VERSION = "1.19.4"
+HUGO_VERSION = "0.148.2"
+HUGO_ENV = "production"
+HUGO_ENABLEGITINFO = "true"
+GO_VERSION = "1.19.4"

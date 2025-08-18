@@ -4,11 +4,11 @@ title = "notes"
 
 theme = "tt-theme"
 
-paginate = 10
+pagination.pagerSize = 10
 pygmentsCodeFences = true
 pygmentsStyle = "native"
 
 enableRobotsTXT = true
 
 [outputs]
-    home = ["HTML", "RSS", "JSON"]
+home = ["HTML", "RSS", "JSON"]

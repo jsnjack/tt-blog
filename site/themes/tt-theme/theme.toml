@@ -8,8 +8,8 @@ description = ""
 homepage = "http://example.com/"
 tags = []
 features = []
-min_version = "0.41.0"
+min_version = "0.148.0"
 
 [author]
-  name = "Yauhen Shulitski"
-  homepage = "https://github.com/jsnjack"
+name = "Yauhen Shulitski"
+homepage = "https://github.com/jsnjack"
