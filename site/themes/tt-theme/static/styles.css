@@ -166,10 +166,6 @@ a:hover {
     gap: 0.75rem;
 }
 
-.post-divider {
-    display: none;
-}
-
 /* Pagination Styles */
 .pagination {
     display: flex;
