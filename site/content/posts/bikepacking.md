@@ -38,7 +38,8 @@ tags: ["cycling", "bikepacking"]
 - Lights (front and rear) x1
 - Charger USB-C x1
 - Charging cable x1
-- Di-2 charger x1
+- Di2 adapter x1
+- Garmin adapter x1
 - Power bank x1
 - Headphones x1
 
