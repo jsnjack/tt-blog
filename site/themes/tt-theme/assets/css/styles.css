@@ -65,8 +65,28 @@ main {
         flex-direction: column;
     }
 
-    .sidebar {
+    .desktop-sidebar {
         display: none;
+    }
+
+    .mobile-sidebar {
+        display: block;
+        padding: 1rem;
+    }
+
+    .mobile-sidebar details {
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+    }
+
+    .mobile-sidebar summary {
+        padding: 0.5rem;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .mobile-sidebar .sidebar-content {
+        padding: 1rem;
     }
 }
 
@@ -318,4 +338,43 @@ a:hover {
 
 .social-links img {
     vertical-align: middle;
+}
+
+.mobile-sidebar {
+    display: none;
+}
+
+.desktop-sidebar {
+    display: block;
+}
+
+/* For screens smaller than 768px, stack the columns */
+@media (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    .desktop-sidebar {
+        display: none;
+    }
+
+    .mobile-sidebar {
+        display: block;
+        padding: 1rem;
+    }
+
+    .mobile-sidebar details {
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+    }
+
+    .mobile-sidebar summary {
+        padding: 0.5rem;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .mobile-sidebar .sidebar-content {
+        padding: 1rem;
+    }
 }
