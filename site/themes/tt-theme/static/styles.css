@@ -145,6 +145,8 @@ a:hover {
     color: var(--code-text-color);
     padding: 3px 6px;
     border-radius: 4px;
+    margin: 2px 5px;
+    display: inline-block;
 }
 
 .post-content pre code {
@@ -301,4 +303,23 @@ a:hover {
     color: var(--text-color);
     background-color: transparent;
     border-bottom-color: var(--text-color);
+}
+
+.post-content img {
+    display: block;
+    margin: 1.5rem auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Social Links in Sidebar */
+.social-links a,
+.social-links a:hover {
+    padding: 0;
+    background-color: transparent;
+}
+
+.social-links img {
+    vertical-align: middle;
 }

@@ -1,5 +1,5 @@
 {{ define "main" }}
-    <h2 class="text-center">{{ lower .Title }}/</h2>
+    <h2>{{ lower .Title }}/</h2>
     {{ $paginator := .Paginate ( .Pages ) }}
     {{ range $paginator.Pages }}
         {{ partial "post.html" . }}
