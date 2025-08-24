@@ -13,7 +13,8 @@
                 <a class="in-post-tag" href="{{ .Permalink }}">{{ $name }}</a>
             {{ end }}
         {{ end }}
-        | {{ .Date.Format "2 Jan 2006" }}
+        <span>&middot;</span>
+        <span>{{ .Date.Format "2 Jan 2006" }}</span>
     </div>
 </div>
 <div class="post-divider"></div>

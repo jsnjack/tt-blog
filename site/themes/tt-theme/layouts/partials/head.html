@@ -12,13 +12,7 @@
 <title>{{ .Title }} &middot; {{ .Site.Title }}</title>
 {{- end }}
 
-{{ $scss := resources.Get "styles.scss" }}
-{{ $style := $scss | css.Sass | resources.Minify }}
-<link rel="stylesheet" href="{{ $style.RelPermalink }}">
-
-{{ range .Site.Params.customCSS -}}
-<link rel="stylesheet" href="{{ . | relURL }}">
-{{- end }}
+<link rel="stylesheet" href="/styles.css">
 
 <script src="/js/mark.js"></script>
 <script src="/js/search.js"></script>

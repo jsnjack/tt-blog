@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
     var searchResults = document.getElementById("search-results");
     var searchInput = document.getElementById("search-query");
     window.clearSearchInput = function () {
@@ -11,31 +11,26 @@ document.addEventListener("DOMContentLoaded", function(){
     var contextDive = 40;
 
     var timerUserInput = false;
-    searchInput.addEventListener("keyup", function()
-    {
+    searchInput.addEventListener("keyup", function () {
         // don't start searching every time a key is pressed,
         // wait a bit till users stops typing
         if (timerUserInput) { clearTimeout(timerUserInput); }
         timerUserInput = setTimeout(
-            function()
-            {
+            function () {
                 search(searchInput.value.trim());
             },
             500
         );
     });
 
-    function search(searchQuery)
-    {
+    function search(searchQuery) {
         // clear previous search results
-        while (searchResults.firstChild)
-        {
+        while (searchResults.firstChild) {
             searchResults.removeChild(searchResults.firstChild);
         }
 
         // ignore empty and short search queries
-        if (searchQuery.length === 0 || searchQuery.length < 2)
-        {
+        if (searchQuery.length === 0 || searchQuery.length < 2) {
             searchResults.style.display = "none";
             return;
         }
@@ -43,52 +38,43 @@ document.addEventListener("DOMContentLoaded", function(){
         searchResults.style.display = "block";
 
         // load your index file
-        getJSON("/index.json", function (contents)
-        {
+        getJSON("/index.json", function (contents) {
             var results = [];
             let regex = new RegExp(searchQuery, "i");
             // iterate through posts and collect the ones with matches
-            contents.forEach(function(post)
-            {
+            contents.forEach(function (post) {
                 // here you can also search in tags, categories
                 // or whatever you put into the index.json layout
-                if (post.title.match(regex) || post.content.match(regex))
-                {
+                if (post.title.match(regex) || post.content.match(regex)) {
                     results.push(post);
                 }
             });
 
-            if (results.length > 0)
-            {
+            if (results.length > 0) {
                 searchResults.appendChild(
-                    htmlToElement("<div class='text-center'>Found: ".concat(results.length, "<a id='search-clear' class='float-right' href='#' onclick='clearSearchInput()'>clear</a>", "</div>"))
+                    htmlToElement("<div id='search-summary'>Found: ".concat(results.length, " &middot; <a id='clear-search' href='#' onclick='clearSearchInput()'>clear</a></div>"))
                 );
 
                 // populate search results block with excerpts around the matched search query
-                results.forEach(function (value, key)
-                {
+                results.forEach(function (value, key) {
                     let firstIndexOf = value.content.toLowerCase().indexOf(searchQuery.toLowerCase());
                     let lastIndexOf = firstIndexOf + searchQuery.length;
                     let spaceIndex = firstIndexOf - contextDive;
-                    if (spaceIndex > 0)
-                    {
+                    if (spaceIndex > 0) {
                         spaceIndex = value.content.indexOf(" ", spaceIndex) + 1;
                         if (spaceIndex < firstIndexOf) { firstIndexOf = spaceIndex; }
                         else { firstIndexOf = firstIndexOf - contextDive / 2; }
                     }
-                    else
-                    {
+                    else {
                         firstIndexOf = 0;
                     }
                     let lastSpaceIndex = lastIndexOf + contextDive;
-                    if (lastSpaceIndex < value.content.length)
-                    {
+                    if (lastSpaceIndex < value.content.length) {
                         lastSpaceIndex = value.content.indexOf(" ", lastSpaceIndex);
                         if (lastSpaceIndex !== -1) { lastIndexOf = lastSpaceIndex; }
                         else { lastIndexOf = lastIndexOf + contextDive / 2; }
                     }
-                    else
-                    {
+                    else {
                         lastIndexOf = value.content.length - 1;
                     }
 
@@ -96,10 +82,11 @@ document.addEventListener("DOMContentLoaded", function(){
                     if (firstIndexOf !== 0) { summary = "...".concat(summary); }
                     if (lastIndexOf !== value.content.length - 1) { summary = summary.concat("..."); }
 
-                    let div = "".concat("<div class=\"search-summary\" id=\"search-summary-", key, "\">")
-                        .concat("<h6 class=\"post-title\"><a href=\"", value.permalink, "\">", value.title, "</a></h6>")
-                        .concat("<p>", summary, "</p>")
-                        .concat("</div>");
+                    let div = "".concat("<div class='search-result' id='search-summary-", key, "'>")
+                        .concat("<a href='", value.permalink, "'>")
+                        .concat("<div class='search-result-title'>", value.title, "</div>")
+                        .concat("<div class='search-result-summary'>", summary, "</div>")
+                        .concat("</a></div>");
                     searchResults.appendChild(htmlToElement(div));
 
                     // optionaly highlight the search query in excerpts using mark.js
@@ -107,34 +94,28 @@ document.addEventListener("DOMContentLoaded", function(){
                         .mark(searchQuery, { "separateWordSearch": false });
                 });
             }
-            else
-            {
+            else {
                 searchResults.appendChild(
-                    htmlToElement("<div class='text-center'>Nothing found. ".concat("<a id='search-clear' class='float-right' href='#' onclick='clearSearchInput()'>clear</a>", "</div>"))
+                    htmlToElement("<div id='search-summary'>Nothing found. <a id='clear-search' href='#' onclick='clearSearchInput()'>clear</a></div>")
                 );
             }
         });
     }
 
-    function getJSON(url, fn)
-    {
+    function getJSON(url, fn) {
         let xhr = new XMLHttpRequest();
         xhr.open("GET", url);
-        xhr.onload = function ()
-        {
-            if (xhr.status === 200)
-            {
+        xhr.onload = function () {
+            if (xhr.status === 200) {
                 fn(JSON.parse(xhr.responseText));
             }
-            else
-            {
+            else {
                 console.error(
                     "Error processing ".concat(url, ": ", xhr.status)
-                    );
+                );
             }
         };
-        xhr.onerror = function ()
-        {
+        xhr.onerror = function () {
             console.error("Connection error: ".concat(xhr.status));
         };
         xhr.send();
@@ -142,8 +123,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     // it is faster (more convenient)
     // to generate an element from the raw HTML code
-    function htmlToElement(html)
-    {
+    function htmlToElement(html) {
         let template = document.createElement("template");
         html = html.trim();
         template.innerHTML = html;
