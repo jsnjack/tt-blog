@@ -12,7 +12,10 @@
 <title>{{ .Title }} &middot; {{ .Site.Title }}</title>
 {{- end }}
 
-<link rel="stylesheet" href="/styles.css">
+{{ $style := resources.Get "css/styles.css" | resources.Minify }}
+<link rel="stylesheet" href="{{ $style.Permalink }}">
 
-<script src="/js/mark.js"></script>
-<script src="/js/search.js"></script>
+{{ $mark := resources.Get "js/mark.js" | resources.Minify }}
+<script src="{{ $mark.Permalink }}"></script>
+{{ $search := resources.Get "js/search.js" | resources.Minify }}
+<script src="{{ $search.Permalink }}"></script>
