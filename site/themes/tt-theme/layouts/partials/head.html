@@ -12,10 +12,10 @@
 <title>{{ .Title }} &middot; {{ .Site.Title }}</title>
 {{- end }}
 
-{{ $style := resources.Get "css/styles.css" | resources.Minify }}
-<link rel="stylesheet" href="{{ $style.Permalink }}">
+{{ $style := resources.Get "css/styles.css" | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $style.Permalink | absURL }}">
 
-{{ $mark := resources.Get "js/mark.js" | resources.Minify }}
-<script src="{{ $mark.Permalink }}"></script>
-{{ $search := resources.Get "js/search.js" | resources.Minify }}
-<script src="{{ $search.Permalink }}"></script>
+{{ $mark := resources.Get "js/mark.js" | resources.Minify | resources.Fingerprint }}
+<script src="{{ $mark.Permalink | absURL }}"></script>
+{{ $search := resources.Get "js/search.js" | resources.Minify | resources.Fingerprint }}
+<script src="{{ $search.Permalink | absURL }}"></script>
