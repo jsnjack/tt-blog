@@ -234,7 +234,7 @@ a:hover {
 }
 
 /* Search Results */
-#search-results {
+.search-results {
     margin-top: 1rem;
 }
 
@@ -264,7 +264,7 @@ a:hover {
     border-radius: 3px;
 }
 
-#search-summary {
+.search-summary {
     margin-top: 0.5rem;
     font-size: 0.9rem;
     color: var(--primary-color);
@@ -277,7 +277,7 @@ a:hover {
     font-weight: bold;
 }
 
-#clear-search {
+.clear-search {
     cursor: pointer;
     text-decoration: underline;
     margin-left: 0.5rem;
