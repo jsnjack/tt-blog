@@ -4,7 +4,7 @@
         {{ if ne ($.Scratch.Get "current") ($.Scratch.Get "previous") }}
             <div class="tag-letter">{{ $.Scratch.Get "current" }}</div>
         {{ end }}
-        <span style="white-space: nowrap;">
+        <span class="sidebar-tag-wrapper">
             <a
                 href="{{ .Permalink }}"
                 class="sidebar-tag"

@@ -107,6 +107,12 @@ a:hover {
     color: var(--hover-text-color);
 }
 
+.sidebar-tag-wrapper {
+    display: inline-block;
+    margin-right: 0.5rem;
+    white-space: nowrap;
+}
+
 .sidebar-tag {
     display: inline-block;
 }
