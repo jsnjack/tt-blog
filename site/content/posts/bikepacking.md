@@ -27,12 +27,14 @@ tags: ["cycling", "bikepacking"]
 - Toothpaste x1
 - Warm cream x1
 - Earplugs x1
+- Chain wax x1
 
 #### First Aid
 - Anti-allergy medication x1
 - Pain reliever x1
 - Plasters x1
 - Daily medication x1
+- Magnesium supplement x1
 
 #### Electronics
 - Lights (front and rear) x1
