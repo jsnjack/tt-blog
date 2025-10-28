@@ -1,2 +1,2 @@
-DEFAULT_EDITOR=gnome-text-editor
+DEFAULT_EDITOR=code
 bash -c "cd site && hugo new posts/$1.md && $DEFAULT_EDITOR content/posts/$1.md"
