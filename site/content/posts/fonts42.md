@@ -2,7 +2,7 @@
 title: "Linux desktop fonts configuration in 2025"
 date: 2025-10-28T19:54:02+01:00
 draft: false
-tags: ["linux", "fedora", "font"]
+tags: ["linux", "fedora", "font", "fresh system"]
 ---
 
 Modern font configuration for Linux:
@@ -14,3 +14,8 @@ gsettings set org.gnome.desktop.interface monospace-font-name "Noto Sans Mono 11
 
 `Adwaita Sans` is the new default font for GNOME desktop environment. It looks
 great and modern. `Noto Sans Mono` is a great monospaced font for programming.
+
+To install Noto fonts on Fedora, run:
+```bash
+sudo dnf install google-noto-sans-fonts
+```
