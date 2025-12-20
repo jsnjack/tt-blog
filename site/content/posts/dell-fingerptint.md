@@ -1,5 +1,5 @@
 ---
-title: "Sett up Dell fingerptint reader on Linux"
+title: "Set up Dell fingerprint reader on Linux"
 date: 2025-12-20T13:06:48+01:00
 draft: false
 tags: ["linux", "dell", "fingerprint", "fresh system"]
