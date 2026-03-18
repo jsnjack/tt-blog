@@ -42,3 +42,4 @@ Restart Wireplumber:
 systemctl --user restart wireplumber
 ```
 
+Update 03-2026: With the latest updates only `sudo grubby --update-kernel=ALL --args="amdgpu.dcdebugmask=0x410"` is required.
