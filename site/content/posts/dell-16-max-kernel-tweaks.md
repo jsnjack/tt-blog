@@ -2,7 +2,7 @@
 title: "Running Linux on Dell Pro Max 16 MC16255"
 date: 2026-03-13T21:29:33+01:00
 draft: false
-tags: ["linux", "dell", "amd", "kernel", "fresh system"]
+tags: ["linux", "dell", "amd", "kernel", "fresh system", "dell mc16255"]
 ---
 
 Collection of kernel and configuration tweaks to get the best experience on Linux with the Dell Pro Max 16 MC16255 laptop with AMD Radeon 890M GPU.
