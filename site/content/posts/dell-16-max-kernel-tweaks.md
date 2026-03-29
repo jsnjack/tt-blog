@@ -5,11 +5,11 @@ draft: false
 tags: ["linux", "dell", "amd", "kernel", "fresh system"]
 ---
 
-My Dell Pro Max 16 MC16255 with AMD Radeon 890M GPU requires some kernel parameters to work reliably on Linux. Without these, you'll get screen artifacts and suspend issues with audio and external USB-C screens.
+Collection of kernel and configuration tweaks to get the best experience on Linux with the Dell Pro Max 16 MC16255 laptop with AMD Radeon 890M GPU.
 
-See also: [[Fingerprint reader setup](../dell-fingerptint), [Video codecs](../codecs-amd)
+See also: [Fingerprint reader setup](../dell-fingerptint), [Video codecs](../codecs-amd)
 
-Apply all parameters:
+Add kernel parameters:
 ```bash
 sudo grubby --update-kernel=ALL --args="amdgpu.dcdebugmask=0x410 amdgpu.sg_display=0"
 sudo reboot
@@ -19,8 +19,8 @@ What each parameter does:
 
 | Parameter | Description |
 |-----------|-------------|
-| `amdgpu.dcdebugmask=0x410` | Disables AMD Display Core features that cause screen artifacts and flickering |
-| `amdgpu.sg_display=0` | Disables scatter-gather display to fix cursor stuttering and video playback stuttering every few seconds |
+| `amdgpu.dcdebugmask=0x410` | Fixes screen artifacts and flickering |
+| `amdgpu.sg_display=0` | Fix cursor stuttering and video playback stuttering every few seconds |
 
 Additionally, disable audio interface suspension in Wireplumber. Create `~/.config/wireplumber/wireplumber.conf.d/51-disable-suspension.conf`:
 
